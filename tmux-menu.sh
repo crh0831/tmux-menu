@@ -14,7 +14,7 @@
 #        AUTHOR: C Hawley 
 #  ORGANIZATION: 
 #       CREATED: 2015-09
-#      REVISION: Mon 16 Oct 2017 05:28:00 PM EDT
+#      REVISION: Fri Jan 31 15:51:29 2020
 #===============================================================================
 
 # check for command line argument
@@ -66,15 +66,13 @@ tcheck=$(tmux list-sessions | grep -c "${session}")  # check if session is activ
 
 
 case $session in
-    mine)
+    wsl)
         if [[ $tcheck == 0 ]]; then
-            tmux new-session -d -s mine
+            tmux new-session -d -s wsl
             tmux rename-window 'local(aristotle)'
-            tmux new-window -t 1 -n 'root@vps' 'exec ssh root@vps.example.org'
-            tmux new-window -t:2 -n 'chawley@phaedrus' 'exec ssh chawley@phaedrus'
-            tmux new-window -t:3 -n 'chawley@homer' 'exec ssh chawley@homer.simpsons.net'
+            tmux new-window -t 1 -n 'hq\chawley@chawley-admin' 'exec ssh hq\\chawley@chawley-admin'
         fi
-        tmux attach-session -t mine
+        tmux attach-session -t wsl
         ;;
 
     # add more sessions here inside a case stanza.  Start with a session name and end with ';;'        
